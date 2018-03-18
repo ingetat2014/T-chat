@@ -1,0 +1,6 @@
+Outils :
+Wamp Server : 
+apache2.4.9,mysql5.6.17,php5.5.12, PHPStorm,Netbeans
+Le fichier là où il y a les params de connexon à la BD se trouve dans le Path suivant :
+"Tchat\modele\DB_utils\Database.php"
+Bd exportéé tchat.sql

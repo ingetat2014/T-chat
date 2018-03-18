@@ -1,0 +1,17 @@
+----Les perspectives du test technique sauf manque de temps----
+typage par orm natif
+les interfaces
+cloture de connexion
+transactionnel
+fuseau horaire
+unused functions à enlever
+try catch
+code dupliqué db
+lacces concurrent
+commenter le code
+ajout du captcha
+jout des fonctionnalité de non / ou celui qui c'est qui écrit /aujourd'hui
+raffraichir juste à partir du dernier affichage
+parametrage de la DB par file
+la page doit se raffraichir en Ajax
+pour la liste des connecté la partie Service a déjà été préparé reste juste  à l'implementer 
