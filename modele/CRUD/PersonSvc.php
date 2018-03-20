@@ -9,7 +9,6 @@
 namespace crud;
 use entities\Person;
 use db\Database;
-use db\Constantes;
 
 
 /**

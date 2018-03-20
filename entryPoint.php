@@ -25,7 +25,7 @@ $_SESSION['erreur']="";
         }     
         elseif(isset($_POST['submitmsg'])){
         $id = ($_POST['usermsg'] != "" && isset($_SESSION['id']) && !empty($_SESSION['id']))?$chatCntrl->addChat($_POST['usermsg'], $_SESSION['id']):null;
-        $_SESSION['erreur'] = (!isset($id ) || empty($id ))?"<span class='error'>Erreur lors d'envoi du msg</span>":"";
+        $_SESSION['erreur'] = (!isset($_SESSION['id']) || empty($_SESSION['id']))?"<span class='error'>Send. failed</span>":"";
         header('Location: '.$_SERVER['HTTP_REFERER'] );
         }
         elseif (isset($_POST['exit'])) {

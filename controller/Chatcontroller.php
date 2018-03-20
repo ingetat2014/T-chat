@@ -29,7 +29,7 @@ class Chatcontroller {
         $m = new MessageSvc();
         $msg = new Message();
         $msg->setText($text);
-        $msg->setSending_date(Constantes::getNow());
+        $msg->setSending_date((new \DateTime())->format(Constantes::format_1));
         $id_msg = $m->insert($msg);
         $c = new ChatSvc();
         return $c->insert($id_person, $id_msg);
@@ -51,11 +51,11 @@ class Chatcontroller {
      function subscribe($name,$password){
         $a = new PersonSvc();
         $p = new Person();
-        $p->setLast_connect_date((new \DateTime())->format('Y-m-d H:i:s'));
+        $p->setLast_connect_date((new \DateTime())->format(Constantes::format_1));
         $p->setLast_disconnect_date(NULL);
         $p->setName($name);
         $p->setPassword(md5($password));
-        $p->setSubscribe_date((new \DateTime())->format('Y-m-d H:i:s'));
+        $p->setSubscribe_date((new \DateTime())->format(Constantes::format_1));
         return $a->insert($p);
     }
     
@@ -84,7 +84,7 @@ class Chatcontroller {
     }
     function connectOrDisconnect($id,$disconnect=false){
         $c = new PersonSvc();
-        $c->connectOrDisconnect($id,$disconnect,Constantes::getNow());
+        $c->connectOrDisconnect($id,$disconnect,(new \DateTime())->format(Constantes::format_1));
     }
     
 

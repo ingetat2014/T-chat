@@ -15,3 +15,8 @@ raffraichir juste à partir du dernier affichage
 parametrage de la DB par file
 la page doit se raffraichir en Ajax
 pour la liste des connecté la partie Service a déjà été préparé reste juste  à l'implementer 
+-------TODO------
+Add asynch or Promess dans les sollicitation DB
+regler le probleme de scrolling
+Mise en style du js / css
+refreash session[erreur]

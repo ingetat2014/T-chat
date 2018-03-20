@@ -44,7 +44,7 @@
                 <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <input id="usermsg" name="usermsg" class="col-xs-8 col-sm-8 col-md-7 col-lg-7 btn-default" type="text" required="required" />
-                    <input name="submitmsg" class="btn-default btn-primary col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-2 col-lg-2  col-lg-offset-2"  type="submit" id="Send"   value="Send" />
+                    <input name="submitmsg" class="btn-default btn-default col-xs-3 col-xs-offset-1 col-sm-3 col-sm-offset-1 col-md-2 col-lg-2  col-lg-offset-2"  type="submit" id="Send"   value="Send" />
             </div>
         </div>
             
@@ -76,7 +76,7 @@
                     <input type="password" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-default" name="password"  required="required" />
                     </div>
                     <p>
-                    <input type="submit" class="btn-default btn-primary  col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 col-lg-2 col-lg-offset-10" name="Login" id="loginSubmit"  value="Login"/>
+                    <input type="submit" class="btn-default btn-default  col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 col-lg-2 col-lg-offset-10" name="Login" id="loginSubmit"  value="Login"/>
                      </p>
                     </form>
                 </fieldset>
@@ -91,7 +91,7 @@
                     <label class="col-xs-6 col-sm-6 col-md-6 col-lg-6" for="password">Password</label>
                     <input type="password" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-default" name="password" id="password" required="required" />
                     </div>
-                    <input type="submit" class="btn-default btn-primary xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 col-lg-3 col-lg-offset-9" name="Subscribe" id="loginSubscribe" value="Subscribe" />
+                    <input type="submit" class="btn-default btn-default xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 col-lg-3 col-lg-offset-9" name="Subscribe" id="loginSubscribe" value="Subscribe" />
                 </form>
                 </fieldset>
                  </div>
@@ -149,7 +149,7 @@
             if($("#sessionId").val()!==""){
             $.get("http://localhost/Tchat/entryPoint.php", {id_per: $("#sessionId").val()}, function(result){
             $("#chatBloc").html(result);
-             $("#chatBloc").scrollTop($("#chatBloc").get(0).scrollHeight);
+            $("#chatBloc").scrollTop($("#chatBloc").get(0).scrollHeight);//empecher le defilement manuel
            // console.log(result);
         });
         }
@@ -166,12 +166,13 @@
         };
         getUserConnected();
         var getUsersOnline = function(){
+             if($("#sessionId").val()!=""){ 
             $.get("http://localhost/Tchat/entryPoint.php", {online: true}, function(result){
             $("#userOnline").html(result);
-            console.log(result);
         });
+        }
         };
-        setInterval(getUsersOnline, periode-1);
+        setInterval(getUsersOnline, periode*0.3);
        
         var addChat = function(){
             if($("#usermsg").val()!=""){ 
@@ -183,11 +184,6 @@
          $("#Send").click(function(){
             addChat();
         });
-
-        refreashChat
-
-
-     console.log(" Site de mon inpiration css est celui https://code.tutsplus.com/tutorials/how-to-create-a-simple-web-based-chat-application--net-5931 ");
     });
     </script>
     </body>
