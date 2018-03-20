@@ -10,9 +10,6 @@ namespace crud;
 use entities\Message;
 use db\Database;
 
-//require_once('../DB_utils/Database.php');
-//require_once('../Message.php');
-
 /**
  * Description of Message
  *
@@ -61,9 +58,3 @@ class MessageSvc {
     }
 
 }
-/*$m = new MessageSvc();
-$message = new Message();
-$message->setSending_date((new \DateTime())->format('Y-m-d H:i:sP'));
-$message->setText("smailKomay2 First text");
-//$ii = $m->insert($message);
-die(var_dump($m->insert($message)));*/

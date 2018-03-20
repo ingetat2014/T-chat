@@ -9,13 +9,11 @@
 namespace crud;
 use entities\Person;
 use db\Database;
-//require_once('../DB_utils/Database.php');
-//require_once('../Person.php');
+use db\Constantes;
 
 
 /**
  * Description of Person
- *
  * @author ismail
  */
 class PersonSvc {
@@ -52,26 +50,22 @@ class PersonSvc {
                                 return $this->mapper($row);
 			}
                         return null;
-    }
-    function disconnect($id){
+    }    
+    function connectOrDisconnect($id,$disconnectAprioriser=false,$event_date){
+        $champToBeNull =$disconnectAprioriser ?'Last_connect_date':'Last_disconnect_date';
+        $champToMakeDate =$champToBeNull!='Last_connect_date' ?'Last_connect_date':'Last_disconnect_date';
+       /* die("update Person "
+                . "SET ".$champToMakeDate." =  '".$event_date."',".$champToBeNull."=NULL where id = ".$id);*/
         $stmt = $this->connect->prepare("update Person "
-                . "SET set Last_disconnect_date =  ".(new \DateTime())->format('Y-m-d H:i:sP').",Last_connect_date=NULL where id = ".$id);
+                . "SET ".$champToMakeDate." =  '".$event_date."',".$champToBeNull."=NULL where id = ".$id);
         $stmt->execute();
         $stmt->close();
-        return  null;
-    }
-    
-    function connect($id){
-        $stmt = $this->connect->prepare("update Person "
-                . "SET set Last_connect_date =  ".(new \DateTime())->format('Y-m-d H:i:sP').",Last_disconnect_date=NULL where id = ".$id);
-        $stmt->execute();
-        $stmt->close();
-        return  null;
+        return  $event_date;
     }
     
     function findOnlyConnected(){
         $results = null;
-        $query = $this->connect->query("select * from person where Last_disconnect_date is not null and Last_connect_date is null");
+        $query = $this->connect->query("select * from person where Last_connect_date is not null and Last_disconnect_date is null");
 			while ( $row = $query->fetch_object() ) {
 				$results[] = $this->mapper($row);
 			}
@@ -100,18 +94,3 @@ class PersonSvc {
 
 }
 
-//var_dump( (new \DateTime('2018-03-17 17:23:33'))->format('Y-m-d H:i:sP') > (new \DateTime())->format('Y-m-d H:i:sP'));
-//die();
-/*$a = new PersonSvc();
-$p = new Person();
-$p->setConnected(1);
-$p->setLast_connect_date((new \DateTime())->format('Y-m-d H:i:sP'));
-$p->setLast_disconnect_date((new \DateTime())->format('Y-m-d H:i:sP'));
-$p->setName("user2");
-$p->setPassword(md5("user2"));
-$p->setSubscribe_date((new \DateTime())->format('Y-m-d H:i:sP'));
-//$a->insert($p);
-$person = $a->findById(1);
-var_dump(empty(''));
-die();*/
-//$a->findAll();

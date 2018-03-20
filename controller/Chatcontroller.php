@@ -18,18 +18,18 @@ use crud\ChatSvc;
 use entities\Person;
 use entities\Message;
 use entities\Chat;
-
+use db\Constantes;
 class Chatcontroller {
     //put your code here
     function __construct() {
-        
     }
     
     function addChat($text,$id_person){
+        
         $m = new MessageSvc();
         $msg = new Message();
         $msg->setText($text);
-        $msg->setSending_date((new \DateTime())->format('Y-m-d H:i:sP'));
+        $msg->setSending_date(Constantes::getNow());
         $id_msg = $m->insert($msg);
         $c = new ChatSvc();
         return $c->insert($id_person, $id_msg);
@@ -51,18 +51,17 @@ class Chatcontroller {
      function subscribe($name,$password){
         $a = new PersonSvc();
         $p = new Person();
-        $p->setLast_connect_date((new \DateTime())->format('Y-m-d H:i:sP'));
+        $p->setLast_connect_date((new \DateTime())->format('Y-m-d H:i:s'));
         $p->setLast_disconnect_date(NULL);
         $p->setName($name);
         $p->setPassword(md5($password));
-        $p->setSubscribe_date((new \DateTime())->format('Y-m-d H:i:sP'));
+        $p->setSubscribe_date((new \DateTime())->format('Y-m-d H:i:s'));
         return $a->insert($p);
     }
     
     function listChats($id_person){
         $c = new ChatSvc();
         $allChats = $c->findArchivedChats($id_person);
-        //die(var_dump($allChats));
         for($i=0;$i<count($allChats);$i++){
              echo $allChats[$i]."<br/>";
         }
@@ -74,6 +73,18 @@ class Chatcontroller {
         echo $persons;
         //die(var_dump($allChats));
         //die();
+    }
+
+     function findUsersOnline(){
+        $c = new PersonSvc();
+        $persons = $c->findOnlyConnected();
+        for($i=0;$i<count($persons);$i++){
+             echo $persons[$i]."<br/>";
+        }
+    }
+    function connectOrDisconnect($id,$disconnect=false){
+        $c = new PersonSvc();
+        $c->connectOrDisconnect($id,$disconnect,Constantes::getNow());
     }
     
 

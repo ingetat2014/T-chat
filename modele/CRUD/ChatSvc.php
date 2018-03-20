@@ -12,12 +12,7 @@ use entities\Person;
 use entities\Chat;
 use db\Database;
 
-//require_once('../DB_utils/Database.php');
-//require_once('../Message.php');
-//require_once('../Person.php');
-//require_once('../Chat.php');
-//require_once('./MessageSvc.php');
-//require_once('./PersonSvc.php');
+
 /**
  * Description of Chat
  *
@@ -96,7 +91,7 @@ class ChatSvc {
         if($person->getConnected()){
         $query = $this->connect->query("select * from chat");
 			while ( $row = $query->fetch_object() ) {
-                                $chat =  $this->mapper($row);
+                                $chat =  $this->mapper($row);                               
                                 if($chat->getMessage()->getSending_date()>$person->getSubscribe_date())
 				$results[] = $chat;
 			}
@@ -105,7 +100,3 @@ class ChatSvc {
     }
 
 }
-//$chat = new ChatSvc();
-/*$chat->insert(1, 8);
-$chat->insert(2, 9);*/
-//die(var_dump($chat->findArchivedChats(2)));

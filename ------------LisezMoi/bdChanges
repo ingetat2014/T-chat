@@ -1,0 +1,1 @@
+ALTER TABLE `person` CHANGE `last_connect_date` `last_connect_date` DATETIME NULL;
