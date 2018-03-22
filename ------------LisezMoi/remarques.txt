@@ -4,19 +4,24 @@ les interfaces
 cloture de connexion
 transactionnel
 fuseau horaire
-unused functions à enlever
+unused functions ï¿½ enlever
 try catch
-code dupliqué db
+code dupliquï¿½ db
 lacces concurrent
 commenter le code
 ajout du captcha
-jout des fonctionnalité de non / ou celui qui c'est qui écrit /aujourd'hui
-raffraichir juste à partir du dernier affichage
+jout des fonctionnalitï¿½ de non / ou celui qui c'est qui ï¿½crit /aujourd'hui
+raffraichir juste ï¿½ partir du dernier affichage
 parametrage de la DB par file
 la page doit se raffraichir en Ajax
-pour la liste des connecté la partie Service a déjà été préparé reste juste  à l'implementer 
+pour la liste des connectï¿½ la partie Service a dï¿½jï¿½ ï¿½tï¿½ prï¿½parï¿½ reste juste  ï¿½ l'implementer 
 -------TODO------
 Add asynch or Promess dans les sollicitation DB
 regler le probleme de scrolling
 Mise en style du js / css
 refreash session[erreur]
+monoUser
+escape_string securitÃ© vis Ã  vis mysql et aussi bien injection sql filter_input 
+les exceptions Ã  rendre gÃ©nÃ©riques et journalisÃ©es
+unifier le probleme de format_1 et _2
+les header location vaut mieux qu'il soit cotÃ© front end Js

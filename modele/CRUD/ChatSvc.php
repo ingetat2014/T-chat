@@ -28,42 +28,63 @@ class ChatSvc {
     }
     
     function insert($id_person, $id_message){
+        $insert_id  = null;
         $stmt = $this->connect->prepare("INSERT INTO Chat "
                 . "(id_message,id_person) "
                 . "VALUES (".$id_message.", ".$id_person.")");
+        if($stmt){
         $stmt->execute();
         $insert_id = $stmt->insert_id;
         $stmt->close();
+         }else{
+             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
         return  $insert_id;
     }
     
     function findAll(){
         $results = null;
         $query = $this->connect->query("select * from chat");
+        if($query){
 			while ( $row = $query->fetch_object() ) {
 				$results[] = $this->mapper($row);
 			}
+                         }else{
+             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
         return $results;
     }
      function findById($id){
         $query = $this->connect->query("select * from chat where id=".$id);
+         if($query){
 			while ( $row = $query->fetch_object() ) {
                                 return $this->mapper($row);
 			}
+                         }else{
+             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
                         return null;
     }
     function findByIdPerson($id){
         $query = $this->connect->query("select * from chat where id_person=".$id);
+        if($query){
 			while ( $row = $query->fetch_object() ) {
                                 return $this->mapper($row);
 			}
+        }else{
+            die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
                         return null;
     }
     function findByIdMessage($id){
         $query = $this->connect->query("select * from chat where id_message=".$id);
+        if($query){
 			while ( $row = $query->fetch_object() ) {
                                 return $this->mapper($row);
 			}
+                        }else{
+             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
                         return null;
     }
     function mapper($rowBD){
@@ -90,11 +111,15 @@ class ChatSvc {
         $results = null;
         if($person->getConnected()){
         $query = $this->connect->query("select * from chat");
+        if($query){
 			while ( $row = $query->fetch_object() ) {
                                 $chat =  $this->mapper($row);                               
                                 if($chat->getMessage()->getSending_date()>$person->getSubscribe_date())
 				$results[] = $chat;
 			}
+        }else{
+            die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+        }
         }
         return $results;
     }

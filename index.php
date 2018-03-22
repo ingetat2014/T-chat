@@ -106,7 +106,7 @@
     <script type="text/javascript">
     // jQuery Document
     $(document).ready(function(){
-        var periode = 0.5*1000;//en Mlleseconde
+        var coefficient = 1;
        //Debut : exemple de maquette prevue  faute de temps
         var chats = [{id:1,
             message :{
@@ -155,7 +155,7 @@
         }
         };
         
-        setInterval(refreashChat, periode);
+        setInterval(refreashChat, 2*(coefficient)*1000);
         
         var getUserConnected = function(){
            if($("#sessionId").val()!=""){ 
@@ -172,7 +172,7 @@
         });
         }
         };
-        setInterval(getUsersOnline, periode*0.3);
+        setInterval(getUsersOnline, 2*(coefficient)*1000+1);
        
         var addChat = function(){
             if($("#usermsg").val()!=""){ 
