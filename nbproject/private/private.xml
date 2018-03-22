@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/wamp/www/tchat/controller/Chatcontroller.php</file>
+            <file>file:/C:/wamp/www/tchat/modele/CRUD/PersonSvc.php</file>
+            <file>file:/C:/wamp/www/tchat/------------LisezMoi/remarques.txt</file>
+            <file>file:/C:/wamp/www/tchat/entryPoint.php</file>
+            <file>file:/C:/wamp/www/tchat/modele/CRUD/ChatSvc.php</file>
+            <file>file:/C:/wamp/www/tchat/index.php</file>
+            <file>file:/C:/wamp/www/tchat/modele/CRUD/MessageSvc.php</file>
+            <file>file:/C:/wamp/www/tchat/modele/Utils/Constantes.php</file>
+        </group>
     </open-files>
 </project-private>
