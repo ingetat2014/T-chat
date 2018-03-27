@@ -12,18 +12,17 @@ use entities\Person;
 use entities\Chat;
 use db\Database;
 use db\journaliser;
+use crud\AbstractService;
 /**
  * Description of Chat
  *
  * @author ismail
  */
-class ChatSvc {
+class ChatSvc extends AbstractService{
     //put your code here
-    private $connect;
-    
+
     function __construct() {
-        $db = database::getInstance();
-        $this->connect = $db->getConnection();
+        parent::__construct();
     }
     
     function insert($chat){

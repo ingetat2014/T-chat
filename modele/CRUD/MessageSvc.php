@@ -8,22 +8,19 @@
 
 namespace crud; 
 use entities\Message;
-use db\Database;
 use db\journaliser;
-use crud\IService;
+use crud\AbstractService;
 
 /**
  * Description of Message
  *
  * @author ismail
  */
-class MessageSvc implements IService{
+class MessageSvc extends AbstractService {
     //put your code here
-    private $connect;
     
     function __construct() {
-        $db = database::getInstance();
-        $this->connect = $db->getConnection();
+         parent::__construct();
     }
     
     function insert($message){

@@ -8,21 +8,17 @@
 
 namespace crud;
 use entities\Person;
-use db\Database;
 use db\journaliser;
-use crud\IService;
+use crud\AbstractService;
 /**
  * Description of Person
  * @author ismail
  */
-class PersonSvc implements IService{
+class PersonSvc extends AbstractService{
     //put your code here
-    private $connect;
     
     function __construct() {  
-        $db = database::getInstance();
-        $this->connect = $db->getConnection();
-        
+        parent::__construct();
     }
     
     function insert($person){

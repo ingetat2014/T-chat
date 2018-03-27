@@ -35,8 +35,6 @@ class Chatcontroller {
         $c = new ChatSvc();
         $person = new Person();
         $person->setId($id_person);
-        $c->setPerson($person);
-        $c->setMessage($msg);
         return $c->insert(new Chat($msg,$person));
         
     }
