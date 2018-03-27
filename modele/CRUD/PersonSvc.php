@@ -9,13 +9,13 @@
 namespace crud;
 use entities\Person;
 use db\Database;
-
-
+use db\journaliser;
+use crud\IService;
 /**
  * Description of Person
  * @author ismail
  */
-class PersonSvc {
+class PersonSvc implements IService{
     //put your code here
     private $connect;
     
@@ -25,7 +25,7 @@ class PersonSvc {
         
     }
     
-    function insert(Person $person){
+    function insert($person){
         $insert_id = null;
         $stmt = $this->connect->prepare("INSERT INTO Person "
                 . "(name, password, subscribe_date, last_disconnect_date, last_connect_date) "
@@ -35,7 +35,7 @@ class PersonSvc {
         $insert_id = $stmt->insert_id;
         $stmt->close();
          }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return  $insert_id;
     }
@@ -48,7 +48,7 @@ class PersonSvc {
 				$results[] = $this->mapper($row);
 			}
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return $results;
     }
@@ -59,12 +59,11 @@ class PersonSvc {
                                 return $this->mapper($row);
 			}
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
                         return null;
     }    
     function connectOrDisconnect($id,$disconnectAprioriser=false,$event_date){
-        $event_date = null;
         $champToBeNull =$disconnectAprioriser ?'Last_connect_date':'Last_disconnect_date';
         $champToMakeDate =$champToBeNull!='Last_connect_date' ?'Last_connect_date':'Last_disconnect_date';
        /* die("update Person "
@@ -75,7 +74,7 @@ class PersonSvc {
         $stmt->execute();
         $stmt->close();
         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return  $event_date;
     }
@@ -88,7 +87,7 @@ class PersonSvc {
 				$results[] = $this->mapper($row);
 			}
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return $results;
     }
@@ -101,7 +100,7 @@ class PersonSvc {
 				$results[] = $this->mapper($row);
 			}
                          }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return $results;
     }

@@ -59,7 +59,6 @@ function findFiles($directory, $extensions = array('php')) {
     foreach($directories as $directory) {
         foreach($extensions as $extension) {
             foreach(glob("{$directory}/*.{$extension}") as $file) {
-                //echo $file." , ";
                  require_once $file;
                 $files[$extension][] = $file;
             }

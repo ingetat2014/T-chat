@@ -11,8 +11,7 @@ use entities\Message;
 use entities\Person;
 use entities\Chat;
 use db\Database;
-
-
+use db\journaliser;
 /**
  * Description of Chat
  *
@@ -27,17 +26,17 @@ class ChatSvc {
         $this->connect = $db->getConnection();
     }
     
-    function insert($id_person, $id_message){
+    function insert($chat){
         $insert_id  = null;
         $stmt = $this->connect->prepare("INSERT INTO Chat "
                 . "(id_message,id_person) "
-                . "VALUES (".$id_message.", ".$id_person.")");
+                . "VALUES (".$chat->getMessage()->getId().", ".$chat->getPerson()->getId().")");
         if($stmt){
         $stmt->execute();
         $insert_id = $stmt->insert_id;
         $stmt->close();
          }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return  $insert_id;
     }
@@ -50,7 +49,7 @@ class ChatSvc {
 				$results[] = $this->mapper($row);
 			}
                          }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return $results;
     }
@@ -61,7 +60,7 @@ class ChatSvc {
                                 return $this->mapper($row);
 			}
                          }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
                         return null;
     }
@@ -72,7 +71,7 @@ class ChatSvc {
                                 return $this->mapper($row);
 			}
         }else{
-            die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+            Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
                         return null;
     }
@@ -83,7 +82,7 @@ class ChatSvc {
                                 return $this->mapper($row);
 			}
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
                         return null;
     }
@@ -118,7 +117,7 @@ class ChatSvc {
 				$results[] = $chat;
 			}
         }else{
-            die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+            Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         }
         return $results;

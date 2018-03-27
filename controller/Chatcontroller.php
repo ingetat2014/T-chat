@@ -31,8 +31,13 @@ class Chatcontroller {
         $msg->setText($text);
         $msg->setSending_date((new \DateTime())->format(Constantes::format_1));
         $id_msg = $m->insert($msg);
+        $msg->setId($id_msg);
         $c = new ChatSvc();
-        return $c->insert($id_person, $id_msg);
+        $person = new Person();
+        $person->setId($id_person);
+        $c->setPerson($person);
+        $c->setMessage($msg);
+        return $c->insert(new Chat($msg,$person));
         
     }
     

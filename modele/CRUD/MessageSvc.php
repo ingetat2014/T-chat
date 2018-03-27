@@ -9,13 +9,15 @@
 namespace crud; 
 use entities\Message;
 use db\Database;
+use db\journaliser;
+use crud\IService;
 
 /**
  * Description of Message
  *
  * @author ismail
  */
-class MessageSvc {
+class MessageSvc implements IService{
     //put your code here
     private $connect;
     
@@ -24,7 +26,7 @@ class MessageSvc {
         $this->connect = $db->getConnection();
     }
     
-    function insert(Message $message){
+    function insert($message){
         $insert_id = null;
         $stmt = $this->connect->prepare("INSERT INTO message "
                 . "(text, sending_date) "
@@ -36,7 +38,7 @@ class MessageSvc {
         $stmt->close();
         return  $insert_id;
           }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
  
     }
@@ -50,7 +52,7 @@ class MessageSvc {
 			} 
                         
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         return $results;
     }
@@ -61,7 +63,7 @@ class MessageSvc {
                                 return $this->mapper($row);
 			}
                         }else{
-             die("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
+             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
                         return null;
     }
