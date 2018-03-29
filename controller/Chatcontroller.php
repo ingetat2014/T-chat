@@ -29,7 +29,7 @@ class Chatcontroller {
         $m = new MessageSvc();
         $msg = new Message();
         $msg->setText($text);
-        $msg->setSending_date((new \DateTime())->format(Constantes::format_1));
+        $msg->setSending_date((new \DateTime())->format(Constantes::FORMAT_1));
         $id_msg = $m->insert($msg);
         $msg->setId($id_msg);
         $c = new ChatSvc();
@@ -54,19 +54,20 @@ class Chatcontroller {
      function subscribe($name,$password){
         $a = new PersonSvc();
         $p = new Person();
-        $p->setLast_connect_date((new \DateTime())->format(Constantes::format_1));
+        $p->setLast_connect_date((new \DateTime())->format(Constantes::FORMAT_1));
         $p->setLast_disconnect_date(NULL);
         $p->setName($name);
         $p->setPassword(md5($password));
-        $p->setSubscribe_date((new \DateTime())->format(Constantes::format_1));
+        $p->setSubscribe_date((new \DateTime())->format(Constantes::FORMAT_1));
         return $a->insert($p);
     }
     
     function listChats($id_person){
         $c = new ChatSvc();
         $allChats = $c->findArchivedChats($id_person);
+        echo json_encode(serialize($allChats));
         for($i=0;$i<count($allChats);$i++){
-             echo $allChats[$i]."<br/>";
+           //  echo json_encode(new array($allChats[$i]));
         }
         //die();
     }
@@ -87,7 +88,7 @@ class Chatcontroller {
     }
     function connectOrDisconnect($id,$disconnect=false){
         $c = new PersonSvc();
-        $c->connectOrDisconnect($id,$disconnect,(new \DateTime())->format(Constantes::format_1));
+        $c->connectOrDisconnect($id,$disconnect,(new \DateTime())->format(Constantes::FORMAT_1));
     }
     
 

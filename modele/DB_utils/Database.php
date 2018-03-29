@@ -7,6 +7,7 @@
  */
 
 namespace db;
+use db\Constantes;
 
 /**
  * Description of Connect
@@ -18,10 +19,6 @@ namespace db;
 class Database {
 	private $_connection;
 	private static $_instance; //The single instance
-	private $_host = "localhost";
-	private $_username = "root";
-	private $_password = "";
-	private $_database = "tchat";
 
 	public static function getInstance() {
 		if(!self::$_instance) { 
@@ -31,10 +28,10 @@ class Database {
 	}
 	// Constructor
 	private function __construct() {
-		$this->_connection = new \mysqli($this->_host,
-                        $this->_username,
-                        $this->_password,
-                        $this->_database);
+		$this->_connection = new \mysqli(Constantes::HOST,
+                        Constantes::USERNAME,
+                        Constantes::PASSWORD,
+                        Constantes::DATABASE);
 	
 		// Error handling
 		if ($this->_connection->connect_error) {

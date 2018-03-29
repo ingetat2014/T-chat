@@ -136,7 +136,7 @@
             var eltCHat = '';
             for(var i=0;i<chats.length;i++){
                 eltCHat += "<tr id='"+chats[i].id+"'><td class='sending_date'>"+chats[i].message.sending_date+"</td> <td class='person_name'>"+chats[i].person.name+" : </td> <td class='message_text'> "+chats[i].message.text+"</td></tr>";
-                console.log(eltCHat);
+                //console.log(eltCHat);
             }
              //$("#chatbox").html("<table>"+eltCHat+"</table>");
              eltCHat = '';
@@ -148,9 +148,11 @@
         var refreashChat = function(){
             if($("#sessionId").val()!==""){
             $.get("http://localhost/Tchat/entryPoint.php", {id_per: $("#sessionId").val()}, function(result){
-            $("#chatBloc").html(result);
-            $("#chatBloc").scrollTop($("#chatBloc").get(0).scrollHeight);//empecher le defilement manuel
-           // console.log(result);
+            //$("#chatBloc").html(result);
+            //$("#chatBloc").scrollTop($("#chatBloc").get(0).scrollHeight);//empecher le defilement manuel
+             for (var element in result){
+                console.log(element);
+            };
         });
         }
         };

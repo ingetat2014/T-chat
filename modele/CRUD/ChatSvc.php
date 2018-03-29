@@ -101,7 +101,7 @@ class ChatSvc extends AbstractService{
     
     function findArchivedChats($id_person){
         // depends on last connexion for user il serait mieux de passer par des jointures 
-        // pour des raisons d'une premiere analyse on passe par OO
+        // pour des raisons d'une premiere analyse on passe par Orienté Objet
         $chat = new Chat();
         //$person = new Person();
         $psvc = new PersonSvc();
@@ -119,7 +119,7 @@ class ChatSvc extends AbstractService{
             Journaliser::notifier("Erreur SQL Class: ".__CLASS__." Fonction: ".__FUNCTION__.". ");
         }
         }
-        return $results;
+        return  $results;
     }
 
 }
